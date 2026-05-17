@@ -33,25 +33,38 @@ module.exports = {
     try {
       // Build fields
       const fields = {};
+      const getSafeValue = (id, fallback = 'N/A') => {
+        try {
+          return interaction.fields.getTextInputValue(id) || fallback;
+        } catch (e) {
+          return fallback;
+        }
+      };
+
       if (type === 'support') {
-        fields['Issue']    = interaction.fields.getTextInputValue('issue');
-        fields['Order ID'] = interaction.fields.getTextInputValue('order_id') || 'N/A';
-        fields['Product']  = interaction.fields.getTextInputValue('product')  || 'N/A';
+        fields['Issue']    = getSafeValue('issue', 'N/A');
+        fields['Order ID'] = getSafeValue('order_id', 'N/A');
+        fields['Product']  = getSafeValue('product', 'N/A');
       } else if (type === 'order') {
-        fields['Order ID']       = interaction.fields.getTextInputValue('order_id');
-        fields['Email']          = interaction.fields.getTextInputValue('email');
-        fields['Product']        = interaction.fields.getTextInputValue('product');
-        fields['Payment Method'] = interaction.fields.getTextInputValue('payment_method') || 'N/A';
+        fields['Order ID']       = getSafeValue('order_id', 'N/A');
+        fields['Email']          = getSafeValue('email', 'N/A');
+        fields['Product']        = getSafeValue('product', 'N/A');
+        fields['Payment Method'] = getSafeValue('payment_method', 'N/A');
       } else if (type === 'application') {
-        fields['Role']       = interaction.fields.getTextInputValue('role');
-        fields['Age']        = interaction.fields.getTextInputValue('age');
-        fields['Experience'] = interaction.fields.getTextInputValue('experience');
-        fields['Reason']     = interaction.fields.getTextInputValue('reason');
+        fields['Role']       = getSafeValue('role', 'N/A');
+        fields['Age']        = getSafeValue('age', 'N/A');
+        fields['Experience'] = getSafeValue('experience', 'N/A');
+        fields['Reason']     = getSafeValue('reason', 'N/A');
       }
 
-      const rawPriority = type === 'support'
-        ? (interaction.fields.getTextInputValue('priority') || 'medium').toLowerCase().trim()
-        : 'medium';
+      let rawPriority = 'medium';
+      try {
+        if (type === 'support') {
+          rawPriority = (interaction.fields.getTextInputValue('priority') || 'medium').toLowerCase().trim();
+        }
+      } catch (e) {
+        // Fallback for older ticket modal versions
+      }
       const priority  = ['low', 'medium', 'high'].includes(rawPriority) ? rawPriority : 'medium';
       const ticketNum = getTicketNumber();
       const meta      = TICKET_META[type];
