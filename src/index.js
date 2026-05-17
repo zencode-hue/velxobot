@@ -245,9 +245,12 @@ async function initializeSettings() {
   }
 }
 
+const { deployCommands } = require('./deploy');
+
 // ─── 4. Bootstrapped Startup ───
 (async () => {
   await initializeSettings();
+  await deployCommands();
 
   // Fire initial heartbeat on ready and register interval
   client.once('ready', () => {
