@@ -62,6 +62,17 @@ module.exports = {
           `2. Select **Staff Application** from our ticket category dropdown panel.\n` +
           `3. Fill out the application questionnaire, and our administrative team will review your application within 24–48 hours!`
         );
+    } else {
+      embed
+        .setTitle('❓  MetraMart Support FAQ Help Desk')
+        .setDescription(
+          `Select one of the topics below when running the \`/faq\` command to see detailed guides:\n\n` +
+          `• **How to Claim Orders** (\`claim\`)\n` +
+          `• **Warranty & Replacements** (\`warranty\`)\n` +
+          `• **Cryptocurrency Checkout** (\`crypto\`)\n` +
+          `• **Join the Staff Team** (\`staff\`)\n\n` +
+          `*Usage: Type \`/faq\` in any channel and select a topic from the autocomplete choices.*`
+        );
     }
 
     return interaction.reply({ embeds: [embed] });
