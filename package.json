@@ -2,10 +2,10 @@
   "name": "metramart-bot",
   "version": "1.0.0",
   "description": "MetraMart Shop Discord Bot",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
-    "deploy": "node deploy.js"
+    "start": "node src/index.js",
+    "deploy": "node src/deploy.js"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
