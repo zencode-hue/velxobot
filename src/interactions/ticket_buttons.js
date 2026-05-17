@@ -4,7 +4,7 @@ const {
   AttachmentBuilder, MessageFlags,
 } = require('discord.js');
 const {
-  VELXO_ORANGE, VELXO_GREEN, VELXO_RED,
+  METRAMART_GOLD, METRAMART_GREEN, METRAMART_RED,
   SHOP_ICON, SHOP_URL, BOT_FOOTER,
 } = require('../constants');
 const { errorEmbed, buildTranscript } = require('../utils');
@@ -18,20 +18,22 @@ module.exports = {
 
     // ── Close button ──────────────────────────────────────────────────────────
     if (id.startsWith('ticket_close')) {
+      const creatorId = id.split(':')[1] || '';
       const confirm = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setCustomId('ticket_confirm_close').setLabel('Confirm Close').setStyle(ButtonStyle.Danger).setEmoji('🔒'),
+        new ButtonBuilder().setCustomId(`ticket_confirm_close:${creatorId}`).setLabel('Confirm Close').setStyle(ButtonStyle.Danger).setEmoji('🔒'),
         new ButtonBuilder().setCustomId('ticket_cancel_close').setLabel('Cancel').setStyle(ButtonStyle.Secondary).setEmoji('✖️'),
       );
       const embed = new EmbedBuilder()
         .setTitle('🔒  Close Ticket?')
         .setDescription('Are you sure you want to close this ticket? A transcript will be saved.')
-        .setColor(VELXO_ORANGE)
+        .setColor(METRAMART_GOLD)
         .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
       return interaction.reply({ embeds: [embed], components: [confirm], flags: MessageFlags.Ephemeral });
     }
 
     // ── Confirm close ─────────────────────────────────────────────────────────
-    if (id === 'ticket_confirm_close') {
+    if (id.startsWith('ticket_confirm_close')) {
+      const creatorId = id.split(':')[1] || '';
       await interaction.deferUpdate();
       const channel = interaction.channel;
       const guild   = interaction.guild;
@@ -39,7 +41,7 @@ module.exports = {
       const closing = new EmbedBuilder()
         .setTitle('🔒  Ticket Closing')
         .setDescription(`Closed by ${interaction.user}\nSaving transcript and deleting in **5 seconds**...`)
-        .setColor(VELXO_RED)
+        .setColor(METRAMART_RED)
         .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
       await channel.send({ embeds: [closing] });
 
@@ -51,9 +53,35 @@ module.exports = {
         const tEmbed = new EmbedBuilder()
           .setTitle(`📄  Transcript — #${channel.name}`)
           .setDescription(`Closed by ${interaction.user}`)
-          .setColor(VELXO_ORANGE).setTimestamp()
+          .setColor(METRAMART_GOLD).setTimestamp()
           .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
         await transcriptCh.send({ embeds: [tEmbed], files: [file] });
+      }
+
+      // Send interactive Review Embed to the Ticket Creator via DM
+      if (creatorId) {
+        try {
+          const creator = await guild.members.fetch(creatorId).catch(() => null);
+          if (creator) {
+            const reviewRow = new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setCustomId(`review_rating:1:${creatorId}`).setLabel('⭐').setStyle(ButtonStyle.Secondary),
+              new ButtonBuilder().setCustomId(`review_rating:2:${creatorId}`).setLabel('⭐⭐').setStyle(ButtonStyle.Secondary),
+              new ButtonBuilder().setCustomId(`review_rating:3:${creatorId}`).setLabel('⭐⭐⭐').setStyle(ButtonStyle.Secondary),
+              new ButtonBuilder().setCustomId(`review_rating:4:${creatorId}`).setLabel('⭐⭐⭐⭐').setStyle(ButtonStyle.Secondary),
+              new ButtonBuilder().setCustomId(`review_rating:5:${creatorId}`).setLabel('⭐⭐⭐⭐⭐').setStyle(ButtonStyle.Secondary)
+            );
+
+            const reviewEmbed = new EmbedBuilder()
+              .setTitle('⭐⭐⭐⭐⭐  How was your MetraMart Support?')
+              .setDescription('Your ticket has been closed. We would love to hear your feedback!\nPlease select a star rating below to rate your support agent:')
+              .setColor(METRAMART_GOLD)
+              .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
+
+            await creator.send({ embeds: [reviewEmbed], components: [reviewRow] });
+          }
+        } catch (dmErr) {
+          console.warn('[Review] DM dispatch failed for ticket creator:', dmErr.message);
+        }
       }
 
       await new Promise(r => setTimeout(r, 5000));
@@ -74,7 +102,7 @@ module.exports = {
       }
       const embed = new EmbedBuilder()
         .setDescription(`✋  Ticket claimed by ${interaction.user}`)
-        .setColor(VELXO_GREEN)
+        .setColor(METRAMART_GREEN)
         .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
       await interaction.reply({ embeds: [embed] });
 

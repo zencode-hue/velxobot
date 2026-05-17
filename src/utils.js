@@ -1,10 +1,10 @@
 const { EmbedBuilder , MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, VELXO_GREEN, VELXO_RED, SHOP_ICON, BOT_FOOTER } = require('./constants');
+const { METRAMART_GOLD, METRAMART_GREEN, METRAMART_RED, SHOP_ICON, BOT_FOOTER } = require('./constants');
 const fs = require('fs');
 
 const COUNTER_FILE = './ticket_counter.json';
 
-function baseEmbed(title, description, color = VELXO_ORANGE) {
+function baseEmbed(title, description, color = METRAMART_GOLD) {
   return new EmbedBuilder()
     .setTitle(title ?? null)
     .setDescription(description ?? null)
@@ -14,11 +14,11 @@ function baseEmbed(title, description, color = VELXO_ORANGE) {
 }
 
 function successEmbed(title, description) {
-  return baseEmbed(`✅  ${title}`, description, VELXO_GREEN);
+  return baseEmbed(`✅  ${title}`, description, METRAMART_GREEN);
 }
 
 function errorEmbed(title, description) {
-  return baseEmbed(`❌  ${title}`, description, VELXO_RED);
+  return baseEmbed(`❌  ${title}`, description, METRAMART_RED);
 }
 
 function hasStaffRole(member) {
@@ -45,7 +45,7 @@ async function buildTranscript(channel) {
   const messages = await channel.messages.fetch({ limit: 100 });
   const sorted = [...messages.values()].reverse();
   const lines = [
-    '=== VELXO TICKET TRANSCRIPT ===',
+    '=== METRAMART TICKET TRANSCRIPT ===',
     `Channel: #${channel.name}`,
     `Generated: ${new Date().toUTCString()}`,
     '='.repeat(40),

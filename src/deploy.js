@@ -15,13 +15,13 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
 (async () => {
   try {
-    console.log(`[Velxo] Deploying ${commands.length} slash commands...`);
+    console.log(`[MetraMart] Deploying ${commands.length} slash commands...`);
     await rest.put(
       Routes.applicationCommands(process.env.CLIENT_ID),
       { body: commands }
     );
-    console.log('[Velxo] Commands deployed successfully.');
+    console.log('[MetraMart] Commands deployed successfully.');
   } catch (err) {
-    console.error('[Velxo] Deploy error:', err);
+    console.error('[MetraMart] Deploy error:', err);
   }
 })();

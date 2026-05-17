@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, VELXO_GREEN, SHOP_ICON, SHOP_URL, BOT_FOOTER } = require('../constants');
+const { METRAMART_GOLD, METRAMART_GREEN, SHOP_ICON, SHOP_URL, BOT_FOOTER } = require('../constants');
 const { errorEmbed } = require('../utils');
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
     }
 
     const embed = new EmbedBuilder()
-      .setTitle('🎉  Order Delivered — Velxo Shop')
+      .setTitle('🎉  Order Delivered — MetraMart')
       .setDescription(
         `Hey **${member.displayName}**, your order is ready.\n` +
         `Your credentials are below — keep them **private** and do not share them with anyone.`
@@ -41,7 +41,7 @@ module.exports = {
           inline: false,
         }
       )
-      .setColor(VELXO_ORANGE)
+      .setColor(METRAMART_GOLD)
       .setThumbnail(SHOP_ICON)
       .setTimestamp()
       .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
@@ -49,14 +49,14 @@ module.exports = {
     if (notes) embed.addFields({ name: '📝  Notes', value: notes, inline: false });
 
     const view = new ActionRowBuilder().addComponents(
-      new ButtonBuilder().setLabel('Velxo Shop').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'),
+      new ButtonBuilder().setLabel('MetraMart').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'),
       new ButtonBuilder().setLabel('Open Support Ticket').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🎫')
     );
 
     try {
       await member.send({ embeds: [embed], components: [view] });
       await interaction.editReply({
-        embeds: [new EmbedBuilder().setTitle('✅  Delivered').setDescription(`Product sent to **${member.displayName}** via DM.`).setColor(VELXO_GREEN).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
+        embeds: [new EmbedBuilder().setTitle('✅  Delivered').setDescription(`Product sent to **${member.displayName}** via DM.`).setColor(METRAMART_GREEN).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
       });
     } catch {
       return interaction.editReply({ embeds: [errorEmbed('DM Failed', `**${member.displayName}** has DMs disabled.`)] });
@@ -72,7 +72,7 @@ module.exports = {
           { name: 'Product',  value: productName,                 inline: true },
           { name: 'Category', value: category,                    inline: true }
         )
-        .setColor(VELXO_ORANGE)
+        .setColor(METRAMART_GOLD)
         .setTimestamp()
         .setFooter({ text: `Customer ID: ${member.id}`, iconURL: SHOP_ICON });
       await logCh.send({ embeds: [log] });

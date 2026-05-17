@@ -1,7 +1,7 @@
 {
-  "name": "velxo-bot",
+  "name": "metramart-bot",
   "version": "1.0.0",
-  "description": "Velxo Shop Discord Bot",
+  "description": "MetraMart Shop Discord Bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

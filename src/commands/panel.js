@@ -1,30 +1,30 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
+const { METRAMART_GOLD, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
 const { errorEmbed, hasStaffRole } = require('../utils');
 
 function buildPanelEmbed() {
   return new EmbedBuilder()
-    .setTitle('🎫  Velxo Support Center')
+    .setTitle('🎫  MetraMart Support Center')
     .setDescription(
-      'Welcome to **Velxo Shop** support.\n' +
+      'Welcome to **MetraMart** support.\n' +
       'Select a category from the dropdown below to open a ticket.\n' +
       'Our team will assist you as soon as possible.\n\n' +
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
       '🎫  **Support** — Issues, questions, problems\n' +
       '📦  **Claim Order** — Claim a purchased product\n' +
-      '📋  **Application** — Join the Velxo staff team\n' +
+      '📋  **Application** — Join the MetraMart staff team\n' +
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
     )
     .addFields(
       { name: '⏱️  Response Time', value: '> Our team typically responds within **15–30 minutes**.', inline: false },
       {
         name: '📌  Before Opening a Ticket',
-        value: '> • Check our [FAQ at velxo.shop](https://velxo.shop/support)\n> • Have your Order ID ready if applicable\n> • One ticket per issue please',
+        value: '> • Check our [FAQ at metramart.xyz](https://metramart.xyz/support)\n> • Have your Order ID ready if applicable\n> • One ticket per issue please',
         inline: false,
       }
     )
     .setThumbnail(SHOP_ICON)
-    .setColor(VELXO_ORANGE)
+    .setColor(METRAMART_GOLD)
     .setTimestamp()
     .setFooter({ text: `${BOT_FOOTER} | AES-256 Encrypted • Instant Delivery • Replacement Guarantee`, iconURL: SHOP_ICON });
 }
@@ -36,11 +36,11 @@ function buildPanelComponents() {
     .addOptions([
       { label: 'Support',           emoji: '🎫', value: 'support',     description: 'Get help with an issue or question' },
       { label: 'Claim Order',       emoji: '📦', value: 'order',       description: 'Claim a product you\'ve purchased' },
-      { label: 'Staff Application', emoji: '📋', value: 'application', description: 'Apply to join the Velxo team' },
+      { label: 'Staff Application', emoji: '📋', value: 'application', description: 'Apply to join the MetraMart team' },
     ]);
 
   const buttons = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setLabel('Velxo Shop').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'),
+    new ButtonBuilder().setLabel('MetraMart').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'),
     new ButtonBuilder().setLabel('Browse Deals').setURL(SHOP_DEALS).setStyle(ButtonStyle.Link).setEmoji('🔥'),
     new ButtonBuilder().setLabel('Support').setURL(SHOP_SUPPORT).setStyle(ButtonStyle.Link).setEmoji('🎫'),
   );
@@ -60,7 +60,7 @@ async function panelCommand(message, client) {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('panel')
-    .setDescription('Post the Velxo support ticket panel in this channel'),
+    .setDescription('Post the MetraMart support ticket panel in this channel'),
 
   async execute(interaction) {
     if (!hasStaffRole(interaction.member)) {

@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, VELXO_GREEN, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
+const { METRAMART_GOLD, METRAMART_GREEN, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
 const { errorEmbed } = require('../utils');
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
         `Our support team has responded to your ticket and is **waiting for your reply**.\n` +
         `Please check your ticket at your earliest convenience so we can resolve your issue.`
       )
-      .setColor(VELXO_ORANGE)
+      .setColor(METRAMART_GOLD)
       .setThumbnail(SHOP_ICON)
       .setTimestamp()
       .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
@@ -36,7 +36,7 @@ module.exports = {
     }
     embed.addFields({
       name: '💡  Quick Tips',
-      value: '> • Reply in your ticket channel\n> • Use the close button when resolved\n> • Visit [velxo.shop/support](https://velxo.shop/support) for self-service',
+      value: '> • Reply in your ticket channel\n> • Use the close button when resolved\n> • Visit [metramart.xyz/support](https://metramart.xyz/support) for self-service',
       inline: false,
     });
 
@@ -44,12 +44,12 @@ module.exports = {
     if (ticketChannel) {
       buttons.addComponents(new ButtonBuilder().setLabel('Go to Ticket').setURL(ticketChannel.url).setStyle(ButtonStyle.Link).setEmoji('📩'));
     }
-    buttons.addComponents(new ButtonBuilder().setLabel('Velxo Shop').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'));
+    buttons.addComponents(new ButtonBuilder().setLabel('MetraMart').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'));
 
     try {
       await member.send({ embeds: [embed], components: [buttons] });
       await interaction.editReply({
-        embeds: [new EmbedBuilder().setTitle('✅  Reminder Sent').setDescription(`Reminder delivered to **${member.displayName}**.`).setColor(VELXO_GREEN).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
+        embeds: [new EmbedBuilder().setTitle('✅  Reminder Sent').setDescription(`Reminder delivered to **${member.displayName}**.`).setColor(METRAMART_GREEN).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
       });
     } catch {
       return interaction.editReply({ embeds: [errorEmbed('DM Failed', `**${member.displayName}** has DMs disabled.`)] });
@@ -64,7 +64,7 @@ module.exports = {
           { name: 'Customer', value: member.toString(),           inline: true },
           ...(ticketChannel ? [{ name: 'Ticket', value: ticketChannel.toString(), inline: true }] : [])
         )
-        .setColor(VELXO_ORANGE).setTimestamp()
+        .setColor(METRAMART_GOLD).setTimestamp()
         .setFooter({ text: `Customer ID: ${member.id}`, iconURL: SHOP_ICON });
       await logCh.send({ embeds: [log] });
     }

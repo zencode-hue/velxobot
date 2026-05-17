@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField, MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, VELXO_GREEN, VELXO_RED, SHOP_ICON, BOT_FOOTER } = require('../constants');
+const { METRAMART_GOLD, METRAMART_GREEN, METRAMART_RED, SHOP_ICON, BOT_FOOTER } = require('../constants');
 const { errorEmbed, hasStaffRole } = require('../utils');
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
       const member = interaction.options.getMember('member');
       await interaction.channel.permissionOverwrites.edit(member, { ViewChannel: true, SendMessages: true });
       return interaction.reply({
-        embeds: [new EmbedBuilder().setDescription(`➕  ${member} added to this ticket.`).setColor(VELXO_GREEN).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
+        embeds: [new EmbedBuilder().setDescription(`➕  ${member} added to this ticket.`).setColor(METRAMART_GREEN).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
       });
     }
 
@@ -30,7 +30,7 @@ module.exports = {
       const member = interaction.options.getMember('member');
       await interaction.channel.permissionOverwrites.delete(member);
       return interaction.reply({
-        embeds: [new EmbedBuilder().setDescription(`➖  ${member} removed from this ticket.`).setColor(VELXO_RED).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
+        embeds: [new EmbedBuilder().setDescription(`➖  ${member} removed from this ticket.`).setColor(METRAMART_RED).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
       });
     }
 
@@ -38,7 +38,7 @@ module.exports = {
       const name = interaction.options.getString('name');
       await interaction.channel.setName(name);
       return interaction.reply({
-        embeds: [new EmbedBuilder().setDescription(`✏️  Ticket renamed to **${name}**.`).setColor(VELXO_ORANGE).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
+        embeds: [new EmbedBuilder().setDescription(`✏️  Ticket renamed to **${name}**.`).setColor(METRAMART_GOLD).setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
       });
     }
 
@@ -46,7 +46,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setTitle('🔒  Ticket Force Closed')
         .setDescription(`Force closed by ${interaction.user}. Deleting in 5 seconds...`)
-        .setColor(VELXO_RED)
+        .setColor(METRAMART_RED)
         .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
       await interaction.reply({ embeds: [embed] });
       await new Promise(r => setTimeout(r, 5000));

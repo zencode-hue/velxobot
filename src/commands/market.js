@@ -26,11 +26,11 @@ module.exports = {
       ),
       new ActionRowBuilder().addComponents(
         new TextInputBuilder().setCustomId('deal_link').setLabel('Product / Deal Link (optional)')
-          .setStyle(TextInputStyle.Short).setPlaceholder('https://velxo.shop/...').setRequired(false).setMaxLength(200)
+          .setStyle(TextInputStyle.Short).setPlaceholder('https://metramart.xyz/...').setRequired(false).setMaxLength(200)
       ),
       new ActionRowBuilder().addComponents(
         new TextInputBuilder().setCustomId('discount_code').setLabel('Discount Code (optional)')
-          .setStyle(TextInputStyle.Short).setPlaceholder('e.g. VELXO20').setRequired(false).setMaxLength(50)
+          .setStyle(TextInputStyle.Short).setPlaceholder('e.g. METRAMART20').setRequired(false).setMaxLength(50)
       )
     );
 

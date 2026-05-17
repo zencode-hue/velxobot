@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, VELXO_GREEN, SHOP_ICON, SHOP_URL, BOT_FOOTER } = require('../constants');
+const { METRAMART_GOLD, METRAMART_GREEN, SHOP_ICON, SHOP_URL, BOT_FOOTER } = require('../constants');
 const { errorEmbed, hasStaffRole } = require('../utils');
 
 module.exports = {
@@ -29,7 +29,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTitle('📦  Select Product Category')
       .setDescription(`Delivering to **${member.displayName}**\nChoose the product category below.`)
-      .setColor(VELXO_ORANGE)
+      .setColor(METRAMART_GOLD)
       .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
 
     await interaction.reply({

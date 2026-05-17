@@ -1,5 +1,5 @@
 const { EmbedBuilder, PermissionsBitField, MessageFlags } = require('discord.js');
-const { VELXO_GREEN, VELXO_RED, SHOP_ICON, BOT_FOOTER } = require('../constants');
+const { METRAMART_GREEN, METRAMART_RED, SHOP_ICON, BOT_FOOTER } = require('../constants');
 const { errorEmbed } = require('../utils');
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setDescription(`➕  ${member} has been added to this ticket.`)
-      .setColor(VELXO_GREEN)
+      .setColor(METRAMART_GREEN)
       .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
 
     await interaction.reply({ embeds: [embed] });

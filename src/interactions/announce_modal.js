@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, VELXO_GREEN, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
+const { METRAMART_GOLD, METRAMART_GREEN, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
 
 module.exports = {
   customId: 'announce_modal:',
@@ -22,7 +22,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTitle(title)
       .setDescription(message)
-      .setColor(VELXO_ORANGE)
+      .setColor(METRAMART_GOLD)
       .addFields({
         name: '\u200b',
         value: '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🚀  Instant Delivery  •  🔐  AES-256 Encrypted  •  🔄  Replacement Guarantee',
@@ -46,7 +46,7 @@ module.exports = {
       embeds: [new EmbedBuilder()
         .setTitle('✅  Announcement Sent')
         .setDescription(`Posted in ${channel}`)
-        .setColor(VELXO_GREEN)
+        .setColor(METRAMART_GREEN)
         .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
     });
 
@@ -60,7 +60,7 @@ module.exports = {
           { name: '@everyone',  value: ping ? 'Yes' : 'No',         inline: true },
           { name: 'Title',      value: title,                       inline: false },
         )
-        .setColor(VELXO_ORANGE).setTimestamp()
+        .setColor(METRAMART_GOLD).setTimestamp()
         .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
       await logCh.send({ embeds: [log] });
     }

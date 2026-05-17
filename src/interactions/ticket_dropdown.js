@@ -15,7 +15,7 @@ module.exports = {
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder().setCustomId('order_id').setLabel('Order ID (if applicable)')
-            .setStyle(TextInputStyle.Short).setPlaceholder('Your order ID from velxo.shop').setRequired(false).setMaxLength(50)
+            .setStyle(TextInputStyle.Short).setPlaceholder('Your order ID from metramart.xyz').setRequired(false).setMaxLength(50)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder().setCustomId('product').setLabel('Product Name')
@@ -34,7 +34,7 @@ module.exports = {
       modal.addComponents(
         new ActionRowBuilder().addComponents(
           new TextInputBuilder().setCustomId('order_id').setLabel('Order ID')
-            .setStyle(TextInputStyle.Short).setPlaceholder('Your order ID from velxo.shop').setRequired(true).setMaxLength(100)
+            .setStyle(TextInputStyle.Short).setPlaceholder('Your order ID from metramart.xyz').setRequired(true).setMaxLength(100)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder().setCustomId('email').setLabel('Email Used at Checkout')
@@ -68,7 +68,7 @@ module.exports = {
             .setStyle(TextInputStyle.Paragraph).setPlaceholder('Previous roles, skills, experience...').setRequired(true).setMaxLength(500)
         ),
         new ActionRowBuilder().addComponents(
-          new TextInputBuilder().setCustomId('reason').setLabel('Why do you want to join Velxo?')
+          new TextInputBuilder().setCustomId('reason').setLabel('Why do you want to join MetraMart?')
             .setStyle(TextInputStyle.Paragraph).setRequired(true).setMaxLength(500)
         )
       );

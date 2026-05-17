@@ -3,7 +3,7 @@ const {
   PermissionsBitField, ChannelType, MessageFlags,
 } = require('discord.js');
 const {
-  VELXO_ORANGE, VELXO_GREEN,
+  METRAMART_GOLD, METRAMART_GREEN,
   SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER,
   PRIORITY_COLORS, PRIORITY_EMOJI, TICKET_META,
 } = require('../constants');
@@ -70,9 +70,9 @@ module.exports = {
 
       // Use configured category ID, fallback to finding/creating one
       let category = guild.channels.cache.get(process.env.TICKET_CATEGORY_ID)
-        || guild.channels.cache.find(c => c.type === ChannelType.GuildCategory && c.name.includes('Velxo Tickets'));
+        || guild.channels.cache.find(c => c.type === ChannelType.GuildCategory && c.name.includes('MetraMart Tickets'));
       if (!category) {
-        category = await guild.channels.create({ name: '📩 Velxo Tickets', type: ChannelType.GuildCategory });
+        category = await guild.channels.create({ name: '📩 MetraMart Tickets', type: ChannelType.GuildCategory });
       }
 
       const channel = await guild.channels.create({
@@ -106,7 +106,7 @@ module.exports = {
         new ButtonBuilder().setCustomId('ticket_adduser').setLabel('Add User').setStyle(ButtonStyle.Primary).setEmoji('➕'),
       );
       const links = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setLabel('Velxo Shop').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'),
+        new ButtonBuilder().setLabel('MetraMart').setURL(SHOP_URL).setStyle(ButtonStyle.Link).setEmoji('🛒'),
         new ButtonBuilder().setLabel('Browse Deals').setURL(SHOP_DEALS).setStyle(ButtonStyle.Link).setEmoji('🔥'),
         new ButtonBuilder().setLabel('Support').setURL(SHOP_SUPPORT).setStyle(ButtonStyle.Link).setEmoji('🎫'),
       );
@@ -118,7 +118,7 @@ module.exports = {
         embeds: [new EmbedBuilder()
           .setTitle('✅  Ticket Created')
           .setDescription(`Your ticket has been opened: ${channel}\nA staff member will assist you shortly.`)
-          .setColor(VELXO_GREEN)
+          .setColor(METRAMART_GREEN)
           .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON })],
       });
 
@@ -138,7 +138,7 @@ module.exports = {
       }
 
     } catch (err) {
-      console.error('[Velxo] Ticket creation error:', err);
+      console.error('[MetraMart] Ticket creation error:', err);
       await interaction.editReply({
         embeds: [errorEmbed('Failed to Create Ticket', 'An error occurred. Please try again or contact an admin.')],
       });

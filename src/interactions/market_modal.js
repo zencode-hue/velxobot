@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
-const { VELXO_ORANGE, VELXO_GREEN, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
+const { METRAMART_GOLD, METRAMART_GREEN, SHOP_ICON, SHOP_URL, SHOP_DEALS, SHOP_SUPPORT, BOT_FOOTER } = require('../constants');
 
 module.exports = {
   customId: 'market_modal',
@@ -20,7 +20,7 @@ module.exports = {
     const progressEmbed = () => new EmbedBuilder()
       .setTitle('📤  Campaign In Progress...')
       .setDescription(`Progress: **${sent + failed}/${total}**\n✅ Sent: **${sent}** | ❌ Failed: **${failed}**`)
-      .setColor(VELXO_ORANGE)
+      .setColor(METRAMART_GOLD)
       .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
 
     const statusMsg = await interaction.editReply({ embeds: [progressEmbed()] });
@@ -28,7 +28,7 @@ module.exports = {
     const dmEmbed = new EmbedBuilder()
       .setTitle(`🛍️  ${subject}`)
       .setDescription(message)
-      .setColor(VELXO_ORANGE)
+      .setColor(METRAMART_GOLD)
       .setThumbnail(SHOP_ICON)
       .setTimestamp()
       .setFooter({ text: `${BOT_FOOTER} | You received this as a server member`, iconURL: SHOP_ICON });
@@ -37,7 +37,7 @@ module.exports = {
       dmEmbed.addFields({ name: '🎟️  Exclusive Discount Code', value: `\`\`\`${discountCode}\`\`\``, inline: false });
     }
     dmEmbed.addFields({
-      name: '🔒  Why Shop at Velxo?',
+      name: '🔒  Why Shop at MetraMart?',
       value: '> 🚀 Instant automated delivery\n> 🔐 AES-256 encrypted credentials\n> 🔄 Replacement guarantee on all products\n> 💳 Crypto & Discord payments accepted',
       inline: false,
     });
@@ -69,7 +69,7 @@ module.exports = {
         { name: '❌  Failed', value: String(failed),  inline: true },
         { name: '👥  Total',  value: String(total),   inline: true },
       )
-      .setColor(VELXO_GREEN).setTimestamp()
+      .setColor(METRAMART_GREEN).setTimestamp()
       .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
     await interaction.editReply({ embeds: [done] });
 
@@ -83,7 +83,7 @@ module.exports = {
           { name: 'Sent',    value: String(sent),                inline: true },
           { name: 'Failed',  value: String(failed),              inline: true },
         )
-        .setColor(VELXO_ORANGE).setTimestamp()
+        .setColor(METRAMART_GOLD).setTimestamp()
         .setFooter({ text: BOT_FOOTER, iconURL: SHOP_ICON });
       await logCh.send({ embeds: [log] });
     }
