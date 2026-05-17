@@ -208,6 +208,14 @@ async function sendHeartbeat() {
 
 // ─── Dynamic Cross-Hosting Configuration Bridge ───
 async function initializeSettings() {
+  console.log('[MetraMart] Diagnostics - Environment Check:', {
+    hasWebsiteUrl: !!process.env.WEBSITE_URL,
+    hasMetramartWebUrl: !!process.env.METRAMART_WEB_URL,
+    hasDiscordToken: !!process.env.DISCORD_TOKEN,
+    websiteUrlValue: process.env.WEBSITE_URL || 'not set',
+    metramartWebUrlValue: process.env.METRAMART_WEB_URL || 'not set'
+  });
+
   const websiteUrl = process.env.WEBSITE_URL || process.env.METRAMART_WEB_URL || 'http://localhost:3000';
   const bypassKey = process.env.INTERNAL_BYPASS_KEY || 'metramart-ai-secret-2024';
 
